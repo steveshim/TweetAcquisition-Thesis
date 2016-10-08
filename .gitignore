@@ -1,5 +1,9 @@
 # Gradle related files
 .gradle/
+build.gradle
+gradle/
+gradlew.bat
+settings.gradle
 
 #Intellij
 .idea/
