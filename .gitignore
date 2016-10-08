@@ -1,0 +1,13 @@
+# Gradle related files
+.gradle/
+
+#Intellij
+.idea/
+
+build/
+*.env
+.classpath
+.settings/
+.project
+/bin/
+
