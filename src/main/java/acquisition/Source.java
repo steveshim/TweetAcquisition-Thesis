@@ -43,6 +43,7 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
         query.setCount(100);
         query.setLang("en");
         query.setSince(MOVIE_DATE);
+        //query.setUntil(getUntilDate(MOVIE_DATE));
         if(minId != Long.MAX_VALUE)
             query.setMaxId(minId);
 
@@ -67,6 +68,7 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
                     //print tweet
                     System.out.println(status.getId() + " User: @" + status.getUser().getName()
                             + " tweets: " + status.getText());
+                    System.out.println("Tweeted on: " + status.getCreatedAt().toString());
                     minId = Math.min(minId, status.getId());
                     list.add(new TwitterResponse(status.getId(), status.getFavoriteCount(), status.getRetweetCount(),
                             status.getUser().getName(), status.getText(), status.getCreatedAt().toString(), status.getSource()));
@@ -86,6 +88,41 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
 
     public boolean hasNext(){
         return minId > 0;
+    }
+
+    //30 days after start date in format YYYY-MM-DD
+    public String getUntilDate(String startDate) throws NumberFormatException{
+        String endDate = "";
+        try{
+            String[] temp = startDate.split("-");
+            int tempYear, tempMonth, tempDay;
+            tempYear = Integer.parseInt(temp[0]);
+            tempMonth = Integer.parseInt(temp[1]) + 1;
+            //if month was December, go to January and increase year
+            if (tempMonth == 13) {
+                tempMonth = 1;
+                tempYear++;
+            }
+            //if month had 30 days, will be same day number, else we need to adjust the day
+            tempDay = Integer.parseInt(temp[2]);
+            if (tempMonth == 1 || tempMonth == 2 || tempMonth == 4 || tempMonth == 6 || tempMonth == 8 ||
+                    tempMonth == 9 || tempMonth == 11)
+                tempDay--;
+            else if (tempMonth == 3) {
+                if (tempYear%4 == 0)
+                    tempDay += 1;
+                else
+                    tempDay += 2;
+            }
+            //need to reformat date to be in YYYY-MM-DD format
+            if (tempMonth < 10)
+                endDate = tempYear + "-0" + tempMonth + "-" + tempDay;
+            else
+                endDate = tempYear + "-" + tempMonth + "-" + tempDay;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return endDate;
     }
 
     public void remove(){
