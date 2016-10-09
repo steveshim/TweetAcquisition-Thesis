@@ -40,8 +40,47 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
         Twitter twitter = tf.getInstance();
 
         Query query = new Query(TWITTER_QUERY);
+        query.setCount(100);
         query.setLang("en");
         query.setSince(MOVIE_DATE);
+        if(minId != Long.MAX_VALUE)
+            query.setMaxId(minId);
+
+        list.addAll(getTweets(twitter, query));
+        return list;
+    }
+
+    private List<TwitterResponse> getTweets(Twitter twitter, Query query){
+        QueryResult result;
+
+        List<TwitterResponse> list = Lists.newArrayList();
+        try{
+            do{
+                result = twitter.search(query);
+                List<Status> tweets = result.getTweets();
+                System.out.println("Size of tweets list = " + tweets.size());
+                if (tweets.size() <= 1){
+                    minId = 0;
+                    return list;
+                }
+                for (Status status : tweets){
+                    //print tweet
+                    System.out.println(status.getId() + " User: @" + status.getUser().getName()
+                            + " tweets: " + status.getText());
+                    minId = Math.min(minId, status.getId());
+                    list.add(new TwitterResponse(status.getId(), status.getFavoriteCount(), status.getRetweetCount(),
+                            status.getUser().getName(), status.getText(), status.getCreatedAt().toString(), status.getSource()));
+                }
+            } while ((query = result.nextQuery()) != null);
+        }catch (TwitterException e){
+            e.printStackTrace();
+            try{
+                Thread.sleep(e.getRateLimitStatus().getSecondsUntilReset() * 1000);
+                list.addAll(getTweets(twitter, query));
+            } catch(InterruptedException e1){
+                e1.printStackTrace();
+            }
+        }
         return list;
     }
 
