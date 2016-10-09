@@ -77,7 +77,8 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
         }catch (TwitterException e){
             e.printStackTrace();
             try{
-                Thread.sleep(e.getRateLimitStatus().getSecondsUntilReset() * 1000);
+                //15 minute time limit
+                Thread.sleep(900 * 1000);
                 list.addAll(getTweets(twitter, query));
             } catch(InterruptedException e1){
                 e1.printStackTrace();
