@@ -82,7 +82,7 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
                 //15 minute time limit
                 for(int i=0; i<15; i++){
                     Thread.sleep(MINUTE);
-                    System.out.println(i + " minutes have passed.");
+                    System.out.println(i+1 + " minutes have passed.");
                 }
                 list.addAll(getTweets(twitter, query));
             } catch(InterruptedException e1){
