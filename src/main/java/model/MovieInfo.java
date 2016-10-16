@@ -82,7 +82,7 @@ public class MovieInfo {
                 + numGood + " instances of good.\n"
                 + numGreat + " instances of great.\n"
                 + numBest + " instances of best.\n"
-                + numBad + "instances of bad.\n"
+                + numBad + " instances of bad.\n"
                 + numWorst + " instances of worst.\n";
     }
 

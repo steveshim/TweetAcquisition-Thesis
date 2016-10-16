@@ -20,6 +20,7 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
     private final String TWITTER_CONSUMER_SECRET = System.getenv("CONSUMER_SECRET");
     private final String TWITTER_ACCESS_TOKEN = System.getenv("ACCESS_TOKEN");
     private final String TWITTER_ACCESS_SECRET = System.getenv("ACCESS_SECRET");
+    private final int MINUTE = 60000;
 
 
     public Source(long minId, String searchQuery, String date){
@@ -76,9 +77,13 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
             } while ((query = result.nextQuery()) != null);
         }catch (TwitterException e){
             e.printStackTrace();
+            System.out.println("Twitter rate limit has been reached, must wait 15 minutes.");
             try{
                 //15 minute time limit
-                Thread.sleep(900 * 1000);
+                for(int i=0; i<15; i++){
+                    Thread.sleep(MINUTE);
+                    System.out.println(i + " minutes have passed.");
+                }
                 list.addAll(getTweets(twitter, query));
             } catch(InterruptedException e1){
                 e1.printStackTrace();
