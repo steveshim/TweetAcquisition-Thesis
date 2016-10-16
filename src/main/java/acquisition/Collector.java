@@ -33,7 +33,8 @@ public class Collector {
         List<Document> documents = data.stream().map(item -> new Document().
                 append("tweetId", item.getId()).append("favoriteCount", item.getFavoriteCount()).
                 append("retweetCount", item.getRetweetCount()).append("userName", item.getUserName()).
-                append("text", item.getText()).append("date", item.getDate()).append("source", item.getSource()))
+                append("text", item.getText()).append("date", item.getDate()).append("source", item.getSource()).
+                append("query", item.getTwitterQuery()))
                 .collect(Collectors.toList());
 
         collection.insertMany(documents);

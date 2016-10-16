@@ -4,10 +4,10 @@ public class TwitterResponse {
     private long id;
     private int favoriteCount;
     private int retweetCount;
-    private String userName, text, date, source;
+    private String userName, text, date, source, twitterQuery;
 
     public TwitterResponse(long id, int favoriteCount, int retweetCount, String userName,
-                           String text, String date, String source){
+                           String text, String date, String source, String twitterQuery){
         super();
         this.id = id;
         this.favoriteCount = favoriteCount;
@@ -16,6 +16,8 @@ public class TwitterResponse {
         this.text = text;
         this.date = date;
         this.source = source;
+        this.twitterQuery = twitterQuery;
+
     }
 
     public int getFavoriteCount() {
@@ -67,12 +69,19 @@ public class TwitterResponse {
     }
 
     public long getId() {
-
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getTwitterQuery() {
+        return twitterQuery;
+    }
+
+    public void setTwitterQuery(String twitterQuery) {
+        this.twitterQuery = twitterQuery;
     }
 
     @Override

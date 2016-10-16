@@ -71,7 +71,7 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
                     System.out.println("Tweeted on: " + status.getCreatedAt().toString());
                     minId = Math.min(minId, status.getId());
                     list.add(new TwitterResponse(status.getId(), status.getFavoriteCount(), status.getRetweetCount(),
-                            status.getUser().getName(), status.getText(), status.getCreatedAt().toString(), status.getSource()));
+                            status.getUser().getName(), status.getText(), status.getCreatedAt().toString(), status.getSource(), TWITTER_QUERY));
                 }
             } while ((query = result.nextQuery()) != null);
         }catch (TwitterException e){
