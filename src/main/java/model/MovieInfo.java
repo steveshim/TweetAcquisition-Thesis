@@ -78,7 +78,12 @@ public class MovieInfo {
 
     @Override
     public String toString(){
-        return "Movie hashtag is " + query + "\nwith " + numTweets + " tweets."  ;
+        return "Movie hashtag is " + query + "\nwith " + numTweets + " tweets.\n"
+                + numGood + " instances of good.\n"
+                + numGreat + " instances of great.\n"
+                + numBest + " instances of best.\n"
+                + numBad + "instances of bad.\n"
+                + numWorst + " instances of worst.\n";
     }
 
     @Override
