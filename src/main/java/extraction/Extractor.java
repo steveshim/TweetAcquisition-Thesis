@@ -56,25 +56,25 @@ public class Extractor {
 
     public void countBad(String text, MovieInfo movie){
         if (text.toLowerCase().contains("bad")){
-            movie.setNumGood(movie.getNumGood() + 1);
+            movie.setNumBad(movie.getNumGood() + 1);
         }
     }
 
     public void countGreat(String text, MovieInfo movie){
         if (text.toLowerCase().contains("great")){
-            movie.setNumGood(movie.getNumGood() + 1);
+            movie.setNumGreat(movie.getNumGood() + 1);
         }
     }
 
     public void countWorst(String text, MovieInfo movie){
         if (text.toLowerCase().contains("worst")){
-            movie.setNumGood(movie.getNumGood() + 1);
+            movie.setNumWorst(movie.getNumGood() + 1);
         }
     }
 
     public void countBest(String text, MovieInfo movie){
         if (text.toLowerCase().contains("best")){
-            movie.setNumGood(movie.getNumGood() + 1);
+            movie.setNumBest(movie.getNumGood() + 1);
         }
     }
 
