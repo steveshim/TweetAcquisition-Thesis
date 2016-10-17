@@ -16,6 +16,26 @@ public class MovieInfo {
         this.numBest = best;
     }
 
+    public void increaseGood(){
+        numGood++;
+    }
+
+    public void increaseGreat(){
+        numGreat++;
+    }
+
+    public void increaseBest(){
+        numBest++;
+    }
+
+    public void increaseBad(){
+        numBad++;
+    }
+
+    public void increaseWorst(){
+        numWorst++;
+    }
+
     public MovieInfo(String query){
         this.query = query;
     }

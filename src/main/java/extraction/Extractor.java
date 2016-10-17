@@ -32,12 +32,16 @@ public class Extractor {
             } else{
                 temp = movies.get(movies.indexOf(temp));
             }
-            temp.setNumTweets(1 + temp.getNumTweets());
-            countGood(text, temp);
-            countGreat(text, temp);
-            countBest(text, temp);
-            countBad(text, temp);
-            countWorst(text, temp);
+            temp.setNumTweets(temp.getNumTweets()+1);
+            String[] tweetArray = text.split("\\s");
+            for (int i=0; i<tweetArray.length; i++){
+                countGood(tweetArray[i], temp);
+                countGreat(tweetArray[i], temp);
+                countBest(tweetArray[i], temp);
+                countBad(tweetArray[i], temp);
+                countWorst(tweetArray[i], temp);
+            }
+
 
             SimpleTweet tweet = new SimpleTweet(user, query, text);
             tweets.add(tweet);
@@ -50,31 +54,31 @@ public class Extractor {
 
     public void countGood(String text, MovieInfo movie){
         if (text.toLowerCase().contains("good")){
-            movie.setNumGood(movie.getNumGood() + 1);
+            movie.increaseGood();
         }
     }
 
     public void countBad(String text, MovieInfo movie){
         if (text.toLowerCase().contains("bad")){
-            movie.setNumBad(movie.getNumBad() + 1);
+            movie.increaseBad();
         }
     }
 
     public void countGreat(String text, MovieInfo movie){
         if (text.toLowerCase().contains("great")){
-            movie.setNumGreat(movie.getNumGreat() + 1);
+            movie.increaseGreat();
         }
     }
 
     public void countWorst(String text, MovieInfo movie){
         if (text.toLowerCase().contains("worst")){
-            movie.setNumWorst(movie.getNumWorst() + 1);
+            movie.increaseWorst();
         }
     }
 
     public void countBest(String text, MovieInfo movie){
         if (text.toLowerCase().contains("best")){
-            movie.setNumBest(movie.getNumBest() + 1);
+            movie.increaseBest();
         }
     }
 
