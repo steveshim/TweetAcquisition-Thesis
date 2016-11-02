@@ -48,9 +48,19 @@ public class Extractor {
             tweets.add(tweet);
         }
 
+        MongoHelper mongoMovies = new MongoHelper("movies", "movies");
+
         for(MovieInfo movie: movies){
             movie.normalize();
             System.out.println(movie.toString());
+            String jsonString = "{'query':'" + movie.getQuery() + "', " +
+                    "'gross':" + movie.getGross() + ", " +
+                    "'good':" + movie.getNormGood() + ", " +
+                    "'great':" + movie.getNormGreat() + ", " +
+                    "'best':" + movie.getNormBest() + ", " +
+                    "'bad':" + movie.getNormBad() + ", " +
+                    "'worst':" + movie.getNormWorst() + "}";
+            mongoMovies.getCollection().insertOne(Document.parse(jsonString));
         }
     }
 
