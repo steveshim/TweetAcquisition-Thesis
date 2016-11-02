@@ -55,6 +55,7 @@ public class Extractor {
             System.out.println(movie.toString());
             String jsonString = "{'query':'" + movie.getQuery() + "', " +
                     "'gross':" + movie.getGross() + ", " +
+                    "'tweets':" + movie.getNumTweets() + ", " +
                     "'good':" + movie.getNormGood() + ", " +
                     "'great':" + movie.getNormGreat() + ", " +
                     "'best':" + movie.getNormBest() + ", " +
