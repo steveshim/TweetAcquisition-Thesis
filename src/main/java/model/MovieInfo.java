@@ -1,12 +1,15 @@
 package model;
 
 
+import java.text.NumberFormat;
+
 public class MovieInfo {
 
     private String query;
     private int numTweets=0, numGood=0, numBad=0, numGreat=0, numWorst=0, numBest=0;
     private double normGood=0, normBad=0, normGreat=0, normWorst=0, normBest=0;
     private double gross;
+    private NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
     public MovieInfo(String query, int tweets, int good, int great, int best, int bad, int worst){
         this.query = query;
@@ -162,7 +165,7 @@ public class MovieInfo {
     @Override
     public String toString(){
         return "Movie hashtag is " + query + "\nwith " + numTweets + " tweets.\n"
-                + "Grossed $" + gross + " on opening weekend.\n"
+                + "Grossed " + formatter.format(gross) + " on opening weekend.\n"
                 + normGood + " normalized good.\n"
                 + normGreat + " normalized great.\n"
                 + normBest + " normalized best.\n"
