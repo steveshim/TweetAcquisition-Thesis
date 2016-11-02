@@ -24,9 +24,10 @@ public class Extractor {
         while(cursor.hasNext()){
             Document document = cursor.next();
             String text = document.getString("text");
+            Double gross = document.getDouble("gross");
             String query = document.getString("query");
             String user = document.getString("userName");
-            MovieInfo temp = new MovieInfo(query);
+            MovieInfo temp = new MovieInfo(query, gross);
             if (!movies.contains(temp)){
                 movies.add(temp);
             } else{
@@ -48,6 +49,7 @@ public class Extractor {
         }
 
         for(MovieInfo movie: movies){
+            movie.normalize();
             System.out.println(movie.toString());
         }
     }

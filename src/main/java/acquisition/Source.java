@@ -43,7 +43,7 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
         Query query = new Query(TWITTER_QUERY);
         query.setCount(100);
         query.setLang("en");
-        query.setSince(MOVIE_DATE);
+        query.setUntil(MOVIE_DATE);
         //query.setUntil(getUntilDate(MOVIE_DATE));
         if(minId != Long.MAX_VALUE)
             query.setMaxId(minId);

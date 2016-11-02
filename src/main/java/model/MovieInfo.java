@@ -5,6 +5,8 @@ public class MovieInfo {
 
     private String query;
     private int numTweets=0, numGood=0, numBad=0, numGreat=0, numWorst=0, numBest=0;
+    private double normGood=0, normBad=0, normGreat=0, normWorst=0, normBest=0;
+    private double gross;
 
     public MovieInfo(String query, int tweets, int good, int great, int best, int bad, int worst){
         this.query = query;
@@ -14,6 +16,19 @@ public class MovieInfo {
         this.numGreat = great;
         this.numWorst = worst;
         this.numBest = best;
+    }
+
+    public MovieInfo(String query, double gross){
+        this.query = query;
+        this.gross = gross;
+    }
+
+    public void normalize(){
+        normGood = ((double)numGood)/((double)numTweets);
+        normBad = ((double)numBad)/((double)numTweets);
+        normWorst = ((double)numWorst)/((double)numTweets);
+        normGreat = ((double)numGreat)/((double)numTweets);
+        normBest = ((double)numBest)/((double)numTweets);
     }
 
     public void increaseGood(){
@@ -96,14 +111,63 @@ public class MovieInfo {
         this.numBest = numBest;
     }
 
+    public double getGross() {
+        return gross;
+    }
+
+    public void setGross(double gross) {
+        this.gross = gross;
+    }
+
+    public double getNormGood() {
+        return normGood;
+    }
+
+    public void setNormGood(double normGood) {
+        this.normGood = normGood;
+    }
+
+    public double getNormBad() {
+        return normBad;
+    }
+
+    public void setNormBad(double normBad) {
+        this.normBad = normBad;
+    }
+
+    public double getNormGreat() {
+        return normGreat;
+    }
+
+    public void setNormGreat(double normGreat) {
+        this.normGreat = normGreat;
+    }
+
+    public double getNormWorst() {
+        return normWorst;
+    }
+
+    public void setNormWorst(double normWorst) {
+        this.normWorst = normWorst;
+    }
+
+    public double getNormBest() {
+        return normBest;
+    }
+
+    public void setNormBest(double normBest) {
+        this.normBest = normBest;
+    }
+
     @Override
     public String toString(){
         return "Movie hashtag is " + query + "\nwith " + numTweets + " tweets.\n"
-                + numGood + " instances of good.\n"
-                + numGreat + " instances of great.\n"
-                + numBest + " instances of best.\n"
-                + numBad + " instances of bad.\n"
-                + numWorst + " instances of worst.\n";
+                + "Grossed $" + gross + " on opening weekend.\n"
+                + normGood + " normalized good.\n"
+                + normGreat + " normalized great.\n"
+                + normBest + " normalized best.\n"
+                + normBad + " normalized bad.\n"
+                + normWorst + " normalized worst.\n";
     }
 
     @Override
