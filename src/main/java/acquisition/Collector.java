@@ -34,7 +34,7 @@ public class Collector {
                 append("tweetId", item.getId()).append("favoriteCount", item.getFavoriteCount()).
                 append("retweetCount", item.getRetweetCount()).append("userName", item.getUserName()).
                 append("text", item.getText()).append("date", item.getDate()).append("source", item.getSource()).
-                append("query", item.getTwitterQuery()))
+                append("query", item.getTwitterQuery()).append("gross", item.getGross()))
                 .collect(Collectors.toList());
 
         collection.insertMany(documents);

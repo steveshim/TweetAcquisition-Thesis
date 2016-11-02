@@ -21,13 +21,15 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
     private final String TWITTER_ACCESS_TOKEN = System.getenv("ACCESS_TOKEN");
     private final String TWITTER_ACCESS_SECRET = System.getenv("ACCESS_SECRET");
     private final int MINUTE = 60000;
+    private final int GROSS;
 
 
-    public Source(long minId, String searchQuery, String date){
+    public Source(long minId, String searchQuery, String date, int gross){
         System.out.println("Searching for: " + searchQuery);
         this.minId = minId;
         this.TWITTER_QUERY = searchQuery;
         this.MOVIE_DATE = date;
+        this.GROSS = gross;
     }
 
     public Collection<TwitterResponse> next(){
@@ -72,7 +74,7 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
                     System.out.println("Tweeted on: " + status.getCreatedAt().toString());
                     minId = Math.min(minId, status.getId());
                     list.add(new TwitterResponse(status.getId(), status.getFavoriteCount(), status.getRetweetCount(),
-                            status.getUser().getName(), status.getText(), status.getCreatedAt().toString(), status.getSource(), TWITTER_QUERY));
+                            status.getUser().getName(), status.getText(), status.getCreatedAt().toString(), status.getSource(), TWITTER_QUERY, GROSS));
                 }
             } while ((query = result.nextQuery()) != null);
         }catch (TwitterException e){
