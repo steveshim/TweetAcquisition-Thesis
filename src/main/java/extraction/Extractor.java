@@ -38,12 +38,12 @@ public class Extractor {
             //If it is a retweet, count up retweets.
             if (text.startsWith("RT @")){
                 temp.setNumRts(temp.getNumRts()+1);
+            } else {
+                String[] tweetArray = text.split("\\s");
+                for (int i = 0; i < tweetArray.length; i++) {
+                    countWord(tweetArray[i], temp);
+                }
             }
-            String[] tweetArray = text.split("\\s");
-            for (int i=0; i<tweetArray.length; i++){
-                countWord(tweetArray[i], temp);
-            }
-
 
             SimpleTweet tweet = new SimpleTweet(user, query, text);
             tweets.add(tweet);

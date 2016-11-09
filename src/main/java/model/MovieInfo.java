@@ -27,11 +27,11 @@ public class MovieInfo {
     }
 
     public void normalize(){
-        normGood = ((double)numGood)/((double)numTweets);
-        normBad = ((double)numBad)/((double)numTweets);
-        normWorst = ((double)numWorst)/((double)numTweets);
-        normGreat = ((double)numGreat)/((double)numTweets);
-        normBest = ((double)numBest)/((double)numTweets);
+        normGood = ((double)numGood)/((double)numTweets-numRts);
+        normBad = ((double)numBad)/((double)numTweets-numRts);
+        normWorst = ((double)numWorst)/((double)numTweets-numRts);
+        normGreat = ((double)numGreat)/((double)numTweets-numRts);
+        normBest = ((double)numBest)/((double)numTweets-numRts);
     }
 
     public int getNumRts() {
