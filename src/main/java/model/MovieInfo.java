@@ -6,7 +6,7 @@ import java.text.NumberFormat;
 public class MovieInfo {
 
     private String query;
-    private int numTweets=0, numGood=0, numBad=0, numGreat=0, numWorst=0, numBest=0;
+    private int numTweets=0, numRts=0, numGood=0, numBad=0, numGreat=0, numWorst=0, numBest=0;
     private double normGood=0, normBad=0, normGreat=0, normWorst=0, normBest=0;
     private double gross;
     private NumberFormat formatter = NumberFormat.getCurrencyInstance();
@@ -32,6 +32,14 @@ public class MovieInfo {
         normWorst = ((double)numWorst)/((double)numTweets);
         normGreat = ((double)numGreat)/((double)numTweets);
         normBest = ((double)numBest)/((double)numTweets);
+    }
+
+    public int getNumRts() {
+        return numRts;
+    }
+
+    public void setNumRts(int numRts) {
+        this.numRts = numRts;
     }
 
     public void increaseGood(){
@@ -165,6 +173,7 @@ public class MovieInfo {
     @Override
     public String toString(){
         return "Movie hashtag is " + query + "\nwith " + numTweets + " tweets.\n"
+                + "Number of retweets: " + numRts + "\n"
                 + "Grossed " + formatter.format(gross) + " on opening weekend.\n"
                 + normGood + " normalized good.\n"
                 + normGreat + " normalized great.\n"

@@ -29,11 +29,16 @@ public class Extractor {
             String user = document.getString("userName");
             MovieInfo temp = new MovieInfo(query, gross);
             if (!movies.contains(temp)){
+                System.out.println(query);
                 movies.add(temp);
             } else{
                 temp = movies.get(movies.indexOf(temp));
             }
             temp.setNumTweets(temp.getNumTweets()+1);
+            //If it is a retweet, count up retweets.
+            if (text.startsWith("RT @")){
+                temp.setNumRts(temp.getNumRts()+1);
+            }
             String[] tweetArray = text.split("\\s");
             for (int i=0; i<tweetArray.length; i++){
                 countGood(tweetArray[i], temp);
@@ -55,6 +60,7 @@ public class Extractor {
             System.out.println(movie.toString());
             String jsonString = "{'query':'" + movie.getQuery() + "', " +
                     "'gross':" + movie.getGross() + ", " +
+                    "'retweets':" + movie.getNumRts() + ", " +
                     "'tweets':" + movie.getNumTweets() + ", " +
                     "'good':" + movie.getNormGood() + ", " +
                     "'great':" + movie.getNormGreat() + ", " +

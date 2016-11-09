@@ -8,9 +8,9 @@ public class CollectorApp {
 
     public static void main(String[] args){
 
-        int gross = 0;
-        String mondayDate = "2016-10-31";
-        String hashtag = "#GimmeDanger";
+        double gross = 85058311;
+        String mondayDate = "2016-11-07";
+        String hashtag = "#DoctorStrange";
 
         Collector collector = new Collector();
         Source source = new Source(Long.MAX_VALUE, hashtag, mondayDate, gross);

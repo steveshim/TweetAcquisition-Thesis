@@ -21,10 +21,10 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
     private final String TWITTER_ACCESS_TOKEN = System.getenv("ACCESS_TOKEN");
     private final String TWITTER_ACCESS_SECRET = System.getenv("ACCESS_SECRET");
     private final int MINUTE = 60000;
-    private final int GROSS;
+    private final double GROSS;
 
 
-    public Source(long minId, String searchQuery, String date, int gross){
+    public Source(long minId, String searchQuery, String date, double gross){
         System.out.println("Searching for: " + searchQuery);
         this.minId = minId;
         this.TWITTER_QUERY = searchQuery;
