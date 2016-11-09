@@ -41,11 +41,7 @@ public class Extractor {
             }
             String[] tweetArray = text.split("\\s");
             for (int i=0; i<tweetArray.length; i++){
-                countGood(tweetArray[i], temp);
-                countGreat(tweetArray[i], temp);
-                countBest(tweetArray[i], temp);
-                countBad(tweetArray[i], temp);
-                countWorst(tweetArray[i], temp);
+                countWord(tweetArray[i], temp);
             }
 
 
@@ -58,44 +54,24 @@ public class Extractor {
         for(MovieInfo movie: movies){
             movie.normalize();
             System.out.println(movie.toString());
-            String jsonString = "{'query':'" + movie.getQuery() + "', " +
-                    "'gross':" + movie.getGross() + ", " +
-                    "'retweets':" + movie.getNumRts() + ", " +
-                    "'tweets':" + movie.getNumTweets() + ", " +
-                    "'good':" + movie.getNormGood() + ", " +
-                    "'great':" + movie.getNormGreat() + ", " +
-                    "'best':" + movie.getNormBest() + ", " +
-                    "'bad':" + movie.getNormBad() + ", " +
-                    "'worst':" + movie.getNormWorst() + "}";
+            String jsonString = JsonHelper.makeJson(movie);
             mongoMovies.getCollection().insertOne(Document.parse(jsonString));
         }
     }
 
-    public void countGood(String text, MovieInfo movie){
+    public void countWord(String text, MovieInfo movie){
         if (text.toLowerCase().contains("good")){
             movie.increaseGood();
         }
-    }
-
-    public void countBad(String text, MovieInfo movie){
         if (text.toLowerCase().contains("bad")){
             movie.increaseBad();
         }
-    }
-
-    public void countGreat(String text, MovieInfo movie){
         if (text.toLowerCase().contains("great")){
             movie.increaseGreat();
         }
-    }
-
-    public void countWorst(String text, MovieInfo movie){
         if (text.toLowerCase().contains("worst")){
             movie.increaseWorst();
         }
-    }
-
-    public void countBest(String text, MovieInfo movie){
         if (text.toLowerCase().contains("best")){
             movie.increaseBest();
         }
