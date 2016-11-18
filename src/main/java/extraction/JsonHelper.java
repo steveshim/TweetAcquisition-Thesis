@@ -9,11 +9,11 @@ public class JsonHelper {
                 "'gross':" + movie.getGross() + ", " +
                 "'retweets':" + movie.getNumRts() + ", " +
                 "'tweets':" + movie.getNumTweets() + ", " +
-                "'good':" + movie.getNormGood() + ", " +
-                "'great':" + movie.getNormGreat() + ", " +
-                "'best':" + movie.getNormBest() + ", " +
-                "'bad':" + movie.getNormBad() + ", " +
-                "'worst':" + movie.getNormWorst() + "}";
+                "'positive':" + movie.getNormPositive() + ", " +
+                "'negative':" + movie.getNormNegative() + ", " +
+                "'movie_in_query':" + movie.getHasMovieInQuery() + ", " +
+                "'positive_no_retweets':" + movie.getPositiveNoRts() + ", " +
+                "'negative_no_retweets':" + movie.getNegativeNoRts() + "}";
         return jsonString;
     }
 }

@@ -6,32 +6,58 @@ import java.text.NumberFormat;
 public class MovieInfo {
 
     private String query;
-    private int numTweets=0, numRts=0, numGood=0, numBad=0, numGreat=0, numWorst=0, numBest=0;
-    private double normGood=0, normBad=0, normGreat=0, normWorst=0, normBest=0;
+    private int numTweets=0, numRts=0, numberOfPositive=0, numberOfNegative=0, positiveNoRts=0, negativeNoRts=0;
+    private double normPositive=0, normNegative=0, normPositiveNoRts=0, normNegativeNoRts=0;
     private double gross;
     private NumberFormat formatter = NumberFormat.getCurrencyInstance();
-
-    public MovieInfo(String query, int tweets, int good, int great, int best, int bad, int worst){
-        this.query = query;
-        this.numTweets = tweets;
-        this.numGood = good;
-        this.numBad = bad;
-        this.numGreat = great;
-        this.numWorst = worst;
-        this.numBest = best;
-    }
+    private int hasMovieInQuery;
 
     public MovieInfo(String query, double gross){
         this.query = query;
         this.gross = gross;
+        if (query.toLowerCase().contains("movie")){
+            hasMovieInQuery = 1;
+        } else{
+            hasMovieInQuery = 0;
+        }
     }
 
-    public void normalize(){
-        normGood = ((double)numGood)/((double)numTweets-numRts);
-        normBad = ((double)numBad)/((double)numTweets-numRts);
-        normWorst = ((double)numWorst)/((double)numTweets-numRts);
-        normGreat = ((double)numGreat)/((double)numTweets-numRts);
-        normBest = ((double)numBest)/((double)numTweets-numRts);
+    public void normalizeTotals(){
+        normPositive = ((double)numberOfPositive/((double)numTweets));
+        normNegative = ((double)numberOfNegative/((double)numTweets));
+    }
+
+    public void normalizeNonRetweets(){
+        normPositiveNoRts = ((double)positiveNoRts/((double)(numTweets-numRts)));
+        normNegativeNoRts = ((double)negativeNoRts/((double)(numTweets-numRts)));
+    }
+
+    public void increasePositive(){
+        numberOfPositive++;
+    }
+    public void increaseNegative(){
+        numberOfNegative++;
+    }
+    public void increasePositiveNoRetweets(){
+        positiveNoRts++;
+    }
+    public void increaseNegativeNoRetweets(){
+        negativeNoRts++;
+    }
+    public int getNumberOfPositive() {
+        return numberOfPositive;
+    }
+
+    public void setNumberOfPositive(int numberOfPositive) {
+        this.numberOfPositive = numberOfPositive;
+    }
+
+    public int getNumberOfNegative() {
+        return numberOfNegative;
+    }
+
+    public void setNumberOfNegative(int numberOfNegative) {
+        this.numberOfNegative = numberOfNegative;
     }
 
     public int getNumRts() {
@@ -40,26 +66,6 @@ public class MovieInfo {
 
     public void setNumRts(int numRts) {
         this.numRts = numRts;
-    }
-
-    public void increaseGood(){
-        numGood++;
-    }
-
-    public void increaseGreat(){
-        numGreat++;
-    }
-
-    public void increaseBest(){
-        numBest++;
-    }
-
-    public void increaseBad(){
-        numBad++;
-    }
-
-    public void increaseWorst(){
-        numWorst++;
     }
 
     public MovieInfo(String query){
@@ -82,46 +88,6 @@ public class MovieInfo {
         this.numTweets = numTweets;
     }
 
-    public int getNumGood() {
-        return numGood;
-    }
-
-    public void setNumGood(int numGood) {
-        this.numGood = numGood;
-    }
-
-    public int getNumBad() {
-        return numBad;
-    }
-
-    public void setNumBad(int numBad) {
-        this.numBad = numBad;
-    }
-
-    public int getNumGreat() {
-        return numGreat;
-    }
-
-    public void setNumGreat(int numGreat) {
-        this.numGreat = numGreat;
-    }
-
-    public int getNumWorst() {
-        return numWorst;
-    }
-
-    public void setNumWorst(int numWorst) {
-        this.numWorst = numWorst;
-    }
-
-    public int getNumBest() {
-        return numBest;
-    }
-
-    public void setNumBest(int numBest) {
-        this.numBest = numBest;
-    }
-
     public double getGross() {
         return gross;
     }
@@ -130,44 +96,60 @@ public class MovieInfo {
         this.gross = gross;
     }
 
-    public double getNormGood() {
-        return normGood;
+    public int getHasMovieInQuery() {
+        return hasMovieInQuery;
     }
 
-    public void setNormGood(double normGood) {
-        this.normGood = normGood;
+    public void setHasMovieInQuery(int hasMovieInQuery) {
+        this.hasMovieInQuery = hasMovieInQuery;
     }
 
-    public double getNormBad() {
-        return normBad;
+    public double getNormPositive() {
+        return normPositive;
     }
 
-    public void setNormBad(double normBad) {
-        this.normBad = normBad;
+    public void setNormPositive(double normPositive) {
+        this.normPositive = normPositive;
     }
 
-    public double getNormGreat() {
-        return normGreat;
+    public double getNormNegative() {
+        return normNegative;
     }
 
-    public void setNormGreat(double normGreat) {
-        this.normGreat = normGreat;
+    public void setNormNegative(double normNegative) {
+        this.normNegative = normNegative;
     }
 
-    public double getNormWorst() {
-        return normWorst;
+    public int getPositiveNoRts() {
+        return positiveNoRts;
     }
 
-    public void setNormWorst(double normWorst) {
-        this.normWorst = normWorst;
+    public void setPositiveNoRts(int positiveNoRts) {
+        this.positiveNoRts = positiveNoRts;
     }
 
-    public double getNormBest() {
-        return normBest;
+    public int getNegativeNoRts() {
+        return negativeNoRts;
     }
 
-    public void setNormBest(double normBest) {
-        this.normBest = normBest;
+    public void setNegativeNoRts(int negativeNoRts) {
+        this.negativeNoRts = negativeNoRts;
+    }
+
+    public double getNormPositiveNoRts() {
+        return normPositiveNoRts;
+    }
+
+    public void setNormPositiveNoRts(double normPositiveNoRts) {
+        this.normPositiveNoRts = normPositiveNoRts;
+    }
+
+    public double getNormNegativeNoRts() {
+        return normNegativeNoRts;
+    }
+
+    public void setNormNegativeNoRts(double normNegativeNoRts) {
+        this.normNegativeNoRts = normNegativeNoRts;
     }
 
     @Override
@@ -175,11 +157,8 @@ public class MovieInfo {
         return "Movie hashtag is " + query + "\nwith " + numTweets + " tweets.\n"
                 + "Number of retweets: " + numRts + "\n"
                 + "Grossed " + formatter.format(gross) + " on opening weekend.\n"
-                + normGood + " normalized good.\n"
-                + normGreat + " normalized great.\n"
-                + normBest + " normalized best.\n"
-                + normBad + " normalized bad.\n"
-                + normWorst + " normalized worst.\n";
+                + normPositive + " normalized positive words.\n"
+                + normNegative + " normalized negative words.\n";
     }
 
     @Override
