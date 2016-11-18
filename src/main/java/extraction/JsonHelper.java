@@ -12,8 +12,8 @@ public class JsonHelper {
                 "'positive':" + movie.getNormPositive() + ", " +
                 "'negative':" + movie.getNormNegative() + ", " +
                 "'movie_in_query':" + movie.getHasMovieInQuery() + ", " +
-                "'positive_no_retweets':" + movie.getPositiveNoRts() + ", " +
-                "'negative_no_retweets':" + movie.getNegativeNoRts() + "}";
+                "'positive_no_retweets':" + movie.getNormPositiveNoRts() + ", " +
+                "'negative_no_retweets':" + movie.getNormNegativeNoRts() + "}";
         return jsonString;
     }
 }
