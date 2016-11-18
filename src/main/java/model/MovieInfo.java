@@ -161,7 +161,7 @@ public class MovieInfo {
                 + normNegative + " normalized negative words.\n"
                 + normPositiveNoRts + " normalized positive in not retweets.\n"
                 + normNegativeNoRts + " normalized negative in not retweets.\n"
-                + "Is 'movie' in hashtag?" + hasMovieInQuery;
+                + "Is 'movie' in hashtag? " + hasMovieInQuery + "\n";
     }
 
     @Override
