@@ -1,5 +1,4 @@
-package extraction;
-
+import extraction.Extractor;
 
 public class ExtractorApp {
     public static void main(String[] args){
