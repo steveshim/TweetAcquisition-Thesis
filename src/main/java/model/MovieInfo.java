@@ -6,15 +6,16 @@ import java.text.NumberFormat;
 public class MovieInfo {
 
     private String query;
-    private int numTweets=0, numRts=0, numberOfPositive=0, numberOfNegative=0, positiveNoRts=0, negativeNoRts=0;
+    private int numTweets=0, numRts=0, numberOfPositive=0, numberOfNegative=0, positiveNoRts=0, negativeNoRts=0, days;
     private double normPositive=0, normNegative=0, normPositiveNoRts=0, normNegativeNoRts=0;
     private double gross;
     private NumberFormat formatter = NumberFormat.getCurrencyInstance();
     private int hasMovieInQuery;
 
-    public MovieInfo(String query, double gross){
+    public MovieInfo(String query, double gross, int days){
         this.query = query;
         this.gross = gross;
+        this.days = days;
         if (query.toLowerCase().contains("movie")){
             hasMovieInQuery = 1;
         } else{
@@ -150,6 +151,14 @@ public class MovieInfo {
 
     public void setNormNegativeNoRts(double normNegativeNoRts) {
         this.normNegativeNoRts = normNegativeNoRts;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
     }
 
     @Override

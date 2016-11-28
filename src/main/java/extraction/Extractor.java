@@ -38,7 +38,12 @@ public class Extractor {
             Double gross = document.getDouble("gross");
             String query = document.getString("query");
             String user = document.getString("userName");
-            MovieInfo temp = new MovieInfo(query, gross);
+            //account for thanksgiving
+            int daysOpened = 3;
+            if(document.getString("days")!=null && !document.getString("days").equals("3")){
+                daysOpened = 5;
+            }
+            MovieInfo temp = new MovieInfo(query, gross, daysOpened);
             if (!movies.contains(temp)){
                 System.out.println(query);
                 movies.add(temp);

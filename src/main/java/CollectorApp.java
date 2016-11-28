@@ -11,9 +11,11 @@ public class CollectorApp {
         double gross = 74403387.0;
         String mondayDate = "2016-11-21";
         String hashtag = "#FantasticBeasts";
+        int days = 5;
 
         Collector collector = new Collector();
-        Source source = new Source(Long.MAX_VALUE, hashtag, mondayDate, gross);
+        //Source source = new Source(Long.MAX_VALUE, hashtag, mondayDate, gross);
+        Source source = new Source(Long.MAX_VALUE, hashtag, mondayDate, gross, days);
 
         while (source.hasNext()){
             Collection<TwitterResponse> tweets = source.next();
