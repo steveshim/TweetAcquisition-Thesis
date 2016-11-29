@@ -8,9 +8,9 @@ public class CollectorApp {
 
     public static void main(String[] args){
 
-        double gross = 17726047.0;
+        double gross = 9101213.0;
         String mondayDate = "2016-11-28";
-        String hashtag = "#Allied";
+        String hashtag = "#BadSanta2";
         int days = 5;
 
         Collector collector = new Collector();
