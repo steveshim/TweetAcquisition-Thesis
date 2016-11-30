@@ -38,9 +38,10 @@ public class Extractor {
             Double gross = document.getDouble("gross");
             String query = document.getString("query");
             String user = document.getString("userName");
+            Integer favorites = document.getInteger("favoriteCount");
             //account for thanksgiving
             int daysOpened = 3;
-            if(document.getString("days")!=null && !document.getString("days").equals("3")){
+            if(document.getInteger("days")!=null && document.getInteger("days") != 3){
                 daysOpened = 5;
             }
             MovieInfo temp = new MovieInfo(query, gross, daysOpened);
@@ -51,6 +52,7 @@ public class Extractor {
                 temp = movies.get(movies.indexOf(temp));
             }
             temp.setNumTweets(temp.getNumTweets()+1);
+            temp.increaseFavorite(favorites);
             String[] tweetArray = text.split("\\s");
             for (int i = 0; i < tweetArray.length; i++) {
                 countWordTotal(tweetArray[i], temp);
@@ -80,10 +82,12 @@ public class Extractor {
     }
 
     public void countWordTotal(String text, MovieInfo movie){
-        if (positiveWords.contains(text.toLowerCase())){
+        if (!text.toLowerCase().equals(movie.getQuery().toLowerCase())
+                && positiveWords.contains(text.toLowerCase())){
             movie.increasePositive();
         }
-        if (negativeWords.contains(text.toLowerCase())){
+        if (!text.toLowerCase().equals(movie.getQuery().toLowerCase())
+                && negativeWords.contains(text.toLowerCase())){
             movie.increaseNegative();
         }
     }

@@ -14,6 +14,7 @@ public class JsonHelper {
                 "'movie_in_query':" + movie.getHasMovieInQuery() + ", " +
                 "'positive_no_retweets':" + movie.getNormPositiveNoRts() + ", " +
                 "'negative_no_retweets':" + movie.getNormNegativeNoRts() + ", " +
+                "'favorites_per_tweet':" + ((double)movie.getFavoriteCount()/(double)movie.getNumTweets()) + ", " +
                 "'daysInTheater':" + movie.getDays() + "}";
         return jsonString;
     }

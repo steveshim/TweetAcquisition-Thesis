@@ -6,7 +6,8 @@ import java.text.NumberFormat;
 public class MovieInfo {
 
     private String query;
-    private int numTweets=0, numRts=0, numberOfPositive=0, numberOfNegative=0, positiveNoRts=0, negativeNoRts=0, days;
+    private int numTweets=0, numRts=0, numberOfPositive=0,
+            numberOfNegative=0, positiveNoRts=0, negativeNoRts=0, days, favoriteCount;
     private double normPositive=0, normNegative=0, normPositiveNoRts=0, normNegativeNoRts=0;
     private double gross;
     private NumberFormat formatter = NumberFormat.getCurrencyInstance();
@@ -21,6 +22,7 @@ public class MovieInfo {
         } else{
             hasMovieInQuery = 0;
         }
+        favoriteCount = 0;
     }
 
     public void normalizeTotals(){
@@ -33,6 +35,9 @@ public class MovieInfo {
         normNegativeNoRts = ((double)negativeNoRts/((double)(numTweets-numRts)));
     }
 
+    public void increaseFavorite(int count){
+        this.favoriteCount += count;
+    }
     public void increasePositive(){
         numberOfPositive++;
     }
@@ -161,6 +166,14 @@ public class MovieInfo {
         this.days = days;
     }
 
+    public int getFavoriteCount() {
+        return favoriteCount;
+    }
+
+    public void setFavoriteCount(int favoriteCount) {
+        this.favoriteCount = favoriteCount;
+    }
+
     @Override
     public String toString(){
         return "Movie hashtag is " + query + "\nwith " + numTweets + " tweets.\n"
@@ -171,6 +184,7 @@ public class MovieInfo {
                 + normPositiveNoRts + " normalized positive in not retweets.\n"
                 + normNegativeNoRts + " normalized negative in not retweets.\n"
                 + "Is 'movie' in hashtag? " + hasMovieInQuery + "\n"
+                + "Favorited: " + favoriteCount + "\n"
                 + "Days in theater: " + days + "\n";
     }
 
