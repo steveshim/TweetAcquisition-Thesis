@@ -7,7 +7,7 @@ public class MovieInfo {
 
     private String query;
     private int numTweets=0, numRts=0, numberOfPositive=0,
-            numberOfNegative=0, positiveNoRts=0, negativeNoRts=0, days, favoriteCount;
+            numberOfNegative=0, positiveNoRts=0, negativeNoRts=0, days, favoriteCount, wordCount, wordCountNoRts;
     private double normPositive=0, normNegative=0, normPositiveNoRts=0, normNegativeNoRts=0;
     private double gross;
     private NumberFormat formatter = NumberFormat.getCurrencyInstance();
@@ -23,18 +23,27 @@ public class MovieInfo {
             hasMovieInQuery = 0;
         }
         favoriteCount = 0;
+        wordCount = 0;
+        wordCountNoRts = 0;
     }
 
     public void normalizeTotals(){
-        normPositive = ((double)numberOfPositive/((double)numTweets));
-        normNegative = ((double)numberOfNegative/((double)numTweets));
+        normPositive = ((double)numberOfPositive/((double)wordCount));
+        normNegative = ((double)numberOfNegative/((double)wordCount));
     }
 
     public void normalizeNonRetweets(){
-        normPositiveNoRts = ((double)positiveNoRts/((double)(numTweets-numRts)));
-        normNegativeNoRts = ((double)negativeNoRts/((double)(numTweets-numRts)));
+        normPositiveNoRts = ((double)positiveNoRts/((double)(wordCountNoRts)));
+        normNegativeNoRts = ((double)negativeNoRts/((double)(wordCountNoRts)));
     }
 
+    public void increaseWordCount(){
+        this.wordCount++;
+    }
+
+    public void increaseWordCountNoRetweets(){
+        this.wordCountNoRts++;
+    }
     public void increaseFavorite(int count){
         this.favoriteCount += count;
     }
@@ -172,6 +181,22 @@ public class MovieInfo {
 
     public void setFavoriteCount(int favoriteCount) {
         this.favoriteCount = favoriteCount;
+    }
+
+    public int getWordCountNoRts() {
+        return wordCountNoRts;
+    }
+
+    public void setWordCountNoRts(int wordCountNoRts) {
+        this.wordCountNoRts = wordCountNoRts;
+    }
+
+    public int getWordCount() {
+        return wordCount;
+    }
+
+    public void setWordCount(int wordCount) {
+        this.wordCount = wordCount;
     }
 
     @Override

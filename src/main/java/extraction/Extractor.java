@@ -55,6 +55,7 @@ public class Extractor {
             temp.increaseFavorite(favorites);
             String[] tweetArray = text.split("\\s");
             for (int i = 0; i < tweetArray.length; i++) {
+                temp.increaseWordCount();
                 countWordTotal(tweetArray[i], temp);
             }
             //If it is a retweet, count up retweets.
@@ -62,6 +63,7 @@ public class Extractor {
                 temp.setNumRts(temp.getNumRts()+1);
             } else {
                 for (int i = 0; i < tweetArray.length; i++) {
+                    temp.increaseWordCountNoRetweets();
                     countWordNoRetweets(tweetArray[i], temp);
                 }
             }
