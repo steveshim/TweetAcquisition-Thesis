@@ -257,6 +257,8 @@ public class MovieInfo {
                 + "Grossed " + formatter.format(gross) + " on opening weekend.\n"
                 + normPositive + " normalized positive words.\n"
                 + normNegative + " normalized negative words.\n"
+                + normCapital + " normalized capital letters.\n"
+                + normPunctuation + " normalized punctuation characters.\n"
                 + normPositiveNoRts + " normalized positive in not retweets.\n"
                 + normNegativeNoRts + " normalized negative in not retweets.\n"
                 + "Is 'movie' in hashtag? " + hasMovieInQuery + "\n"
