@@ -18,6 +18,8 @@ public class Extractor {
     private List<String> positiveWords;
     private List<String> negativeWords;
     private boolean retweet = false;
+    private boolean negate = false;
+    private int negateCounter = 0;
     private String punctuations = ".,!?";
     MongoHelper mongo;
 
@@ -36,6 +38,8 @@ public class Extractor {
 
         while(cursor.hasNext()){
             retweet=false;
+            negate = false;
+            negateCounter = 0;
             Document document = cursor.next();
             String text = document.getString("text");
             Double gross = document.getDouble("gross");
@@ -63,20 +67,33 @@ public class Extractor {
                 temp.setNumRts(temp.getNumRts()+1);
             }
             for (int i = 0; i < tweetArray.length; i++) {
+                if (negateCounter>=2){
+                    negate = false;
+                    negateCounter = 0;
+                }
+                if(negate) {
+                    negateCounter++;
+                }
                 temp.increaseWordCount();
+                //go through characters in tweet to count punctuation and capital letters
+                if(!tweetArray[i].equals("RT") || !tweetArray[i].startsWith("@") || !tweetArray[i].startsWith("#")) {
+                    for (int j = 0; j < tweetArray[i].length(); j++) {
+                        temp.increaseCharacter();
+                        char tempChar = tweetArray[i].charAt(j);
+                        if (Character.isUpperCase(tempChar))
+                            temp.increaseCapital();
+                        else if (punctuations.contains(Character.toString(tempChar)))
+                            temp.increasePunctuation();
+                    }
+                }
+                if(tweetArray[i].toLowerCase().equals("no") || tweetArray[i].toLowerCase().equals("not")){
+                    negate = true;
+                    continue;
+                }
+                countWordTotal(tweetArray[i], temp);
                 if(!retweet) {
                     temp.increaseWordCountNoRetweets();
                     countWordNoRetweets(tweetArray[i], temp);
-                }
-                countWordTotal(tweetArray[i], temp);
-                //go through characters in tweet to count punctuation and capital letters
-                for(int j=0; j<tweetArray[i].length(); j++){
-                    temp.increaseCharacter();
-                    char tempChar = tweetArray[i].charAt(j);
-                    if (Character.isUpperCase(tempChar))
-                        temp.increaseCapital();
-                    else if (punctuations.contains(Character.toString(tempChar)))
-                        temp.increasePunctuation();
                 }
             }
 
@@ -100,22 +117,36 @@ public class Extractor {
      */
 
     public void countWordTotal(String text, MovieInfo movie){
-        if (!text.toLowerCase().equals(movie.getQuery().toLowerCase())
-                && positiveWords.contains(text.toLowerCase())){
-            movie.increasePositive();
+        if (positiveWords.contains(text.toLowerCase()) &&
+                !movie.getQuery().toLowerCase().contains(text.toLowerCase())){
+            if(!negate)
+                movie.increasePositive();
+            else
+                movie.increaseNegative();
         }
-        if (!text.toLowerCase().equals(movie.getQuery().toLowerCase())
-                && negativeWords.contains(text.toLowerCase())){
-            movie.increaseNegative();
+        if (negativeWords.contains(text.toLowerCase())
+                && !movie.getQuery().toLowerCase().contains(text.toLowerCase())){
+            if(!negate)
+                movie.increaseNegative();
+            else
+                movie.increasePositive();
         }
     }
 
     public void countWordNoRetweets(String text, MovieInfo movie){
-        if (positiveWords.contains(text.toLowerCase())){
-            movie.increasePositiveNoRetweets();
+        if (positiveWords.contains(text.toLowerCase()) &&
+                !movie.getQuery().toLowerCase().contains(text.toLowerCase())){
+            if(!negate)
+                movie.increasePositiveNoRetweets();
+            else
+                movie.increaseNegativeNoRetweets();
         }
-        if (negativeWords.contains(text.toLowerCase())){
-            movie.increaseNegativeNoRetweets();
+        if (negativeWords.contains(text.toLowerCase()) &&
+                !movie.getQuery().toLowerCase().contains(text.toLowerCase())){
+            if(!negate)
+                movie.increaseNegativeNoRetweets();
+            else
+                movie.increasePositiveNoRetweets();
         }
     }
 
