@@ -7,8 +7,11 @@ public class MovieInfo {
 
     private String query;
     private int numTweets=0, numRts=0, numberOfPositive=0,
-            numberOfNegative=0, positiveNoRts=0, negativeNoRts=0, days, favoriteCount, wordCount, wordCountNoRts;
-    private double normPositive=0, normNegative=0, normPositiveNoRts=0, normNegativeNoRts=0;
+            numberOfNegative=0, positiveNoRts=0, negativeNoRts=0,
+            numPunctuation=0, numCapitalLetters=0, characterCount=0,
+            days, favoriteCount, wordCount, wordCountNoRts;
+    private double normPositive=0, normNegative=0, normPositiveNoRts=0, normNegativeNoRts=0,
+            normCapital=0, normPunctuation=0;
     private double gross;
     private NumberFormat formatter = NumberFormat.getCurrencyInstance();
     private int hasMovieInQuery;
@@ -27,14 +30,13 @@ public class MovieInfo {
         wordCountNoRts = 0;
     }
 
-    public void normalizeTotals(){
+    public void normalizeValues(){
         normPositive = ((double)numberOfPositive/((double)wordCount));
         normNegative = ((double)numberOfNegative/((double)wordCount));
-    }
-
-    public void normalizeNonRetweets(){
         normPositiveNoRts = ((double)positiveNoRts/((double)(wordCountNoRts)));
         normNegativeNoRts = ((double)negativeNoRts/((double)(wordCountNoRts)));
+        normCapital = ((double)numCapitalLetters/(double)(characterCount));
+        normPunctuation = ((double)numPunctuation/(double)(characterCount));
     }
 
     public void increaseWordCount(){
@@ -58,6 +60,15 @@ public class MovieInfo {
     }
     public void increaseNegativeNoRetweets(){
         negativeNoRts++;
+    }
+    public void increasePunctuation(){
+        numPunctuation++;
+    }
+    public void increaseCapital(){
+        numCapitalLetters++;
+    }
+    public void increaseCharacter(){
+        characterCount++;
     }
     public int getNumberOfPositive() {
         return numberOfPositive;
@@ -197,6 +208,46 @@ public class MovieInfo {
 
     public void setWordCount(int wordCount) {
         this.wordCount = wordCount;
+    }
+
+    public int getNumPunctuation() {
+        return numPunctuation;
+    }
+
+    public void setNumPunctuation(int numPunctuation) {
+        this.numPunctuation = numPunctuation;
+    }
+
+    public int getNumCapitalLetters() {
+        return numCapitalLetters;
+    }
+
+    public void setNumCapitalLetters(int numCapitalLetters) {
+        this.numCapitalLetters = numCapitalLetters;
+    }
+
+    public int getCharacterCount() {
+        return characterCount;
+    }
+
+    public void setCharacterCount(int characterCount) {
+        this.characterCount = characterCount;
+    }
+
+    public double getNormCapital() {
+        return normCapital;
+    }
+
+    public void setNormCapital(double normCapital) {
+        this.normCapital = normCapital;
+    }
+
+    public double getNormPunctuation() {
+        return normPunctuation;
+    }
+
+    public void setNormPunctuation(double normPunctuation) {
+        this.normPunctuation = normPunctuation;
     }
 
     @Override

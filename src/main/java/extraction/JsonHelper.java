@@ -11,6 +11,8 @@ public class JsonHelper {
                 "'tweets':" + movie.getNumTweets() + ", " +
                 "'positive':" + movie.getNormPositive() + ", " +
                 "'negative':" + movie.getNormNegative() + ", " +
+                "'punctuation':" + movie.getNormPunctuation() + ", " +
+                "'capital':" + movie.getNormCapital() + ", " +
                 "'movie_in_query':" + movie.getHasMovieInQuery() + ", " +
                 "'positive_no_retweets':" + movie.getNormPositiveNoRts() + ", " +
                 "'negative_no_retweets':" + movie.getNormNegativeNoRts() + ", " +

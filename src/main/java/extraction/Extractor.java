@@ -17,6 +17,8 @@ public class Extractor {
     private List<MovieInfo> movies = new ArrayList<>();
     private List<String> positiveWords;
     private List<String> negativeWords;
+    private boolean retweet = false;
+    private String punctuations = ".,!?";
     MongoHelper mongo;
 
     public Extractor(){
@@ -33,6 +35,7 @@ public class Extractor {
         MongoCursor<Document> cursor = mongo.getCollection().find().iterator();
 
         while(cursor.hasNext()){
+            retweet=false;
             Document document = cursor.next();
             String text = document.getString("text");
             Double gross = document.getDouble("gross");
@@ -54,19 +57,29 @@ public class Extractor {
             temp.setNumTweets(temp.getNumTweets()+1);
             temp.increaseFavorite(favorites);
             String[] tweetArray = text.split("\\s");
-            for (int i = 0; i < tweetArray.length; i++) {
-                temp.increaseWordCount();
-                countWordTotal(tweetArray[i], temp);
-            }
             //If it is a retweet, count up retweets.
             if (text.startsWith("RT @")){
+                retweet=true;
                 temp.setNumRts(temp.getNumRts()+1);
-            } else {
-                for (int i = 0; i < tweetArray.length; i++) {
+            }
+            for (int i = 0; i < tweetArray.length; i++) {
+                temp.increaseWordCount();
+                if(!retweet) {
                     temp.increaseWordCountNoRetweets();
                     countWordNoRetweets(tweetArray[i], temp);
                 }
+                countWordTotal(tweetArray[i], temp);
+                //go through characters in tweet to count punctuation and capital letters
+                for(int j=0; j<tweetArray[i].length(); j++){
+                    temp.increaseCharacter();
+                    char tempChar = tweetArray[i].charAt(j);
+                    if (Character.isUpperCase(tempChar))
+                        temp.increaseCapital();
+                    else if (punctuations.contains(Character.toString(tempChar)))
+                        temp.increasePunctuation();
+                }
             }
+
 
             SimpleTweet tweet = new SimpleTweet(user, query, text);
             tweets.add(tweet);
@@ -75,13 +88,16 @@ public class Extractor {
         MongoHelper mongoMovies = new MongoHelper("movies", "movies");
 
         for(MovieInfo movie: movies){
-            movie.normalizeTotals();
-            movie.normalizeNonRetweets();
+            movie.normalizeValues();
             System.out.println(movie.toString());
             String jsonString = JsonHelper.makeJson(movie);
             mongoMovies.getCollection().insertOne(Document.parse(jsonString));
         }
     }
+
+    /*
+    HELPER METHODS
+     */
 
     public void countWordTotal(String text, MovieInfo movie){
         if (!text.toLowerCase().equals(movie.getQuery().toLowerCase())
