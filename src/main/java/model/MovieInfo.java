@@ -8,10 +8,10 @@ public class MovieInfo {
     private String query;
     private int numTweets=0, numRts=0, numberOfPositive=0,
             numberOfNegative=0, positiveNoRts=0, negativeNoRts=0,
-            numPunctuation=0, numCapitalLetters=0, characterCount=0,
+            numPunctuation=0, numCapitalLetters=0, characterCount=0, emojiCount=0,
             days, favoriteCount, wordCount, wordCountNoRts;
     private double normPositive=0, normNegative=0, normPositiveNoRts=0, normNegativeNoRts=0,
-            normCapital=0, normPunctuation=0;
+            normCapital=0, normPunctuation=0, normEmojis=0;
     private double gross;
     private NumberFormat formatter = NumberFormat.getCurrencyInstance();
     private int hasMovieInQuery;
@@ -37,6 +37,7 @@ public class MovieInfo {
         normNegativeNoRts = ((double)negativeNoRts/((double)(wordCountNoRts)));
         normCapital = ((double)numCapitalLetters/(double)(characterCount));
         normPunctuation = ((double)numPunctuation/(double)(characterCount));
+        normEmojis = ((double)emojiCount/((double)wordCount));
     }
 
     public void increaseWordCount(){
@@ -69,6 +70,9 @@ public class MovieInfo {
     }
     public void increaseCharacter(){
         characterCount++;
+    }
+    public void increaseEmoji(){
+        emojiCount++;
     }
     public int getNumberOfPositive() {
         return numberOfPositive;
@@ -250,6 +254,26 @@ public class MovieInfo {
         this.normPunctuation = normPunctuation;
     }
 
+    public int getEmojiCount() {
+        return emojiCount;
+    }
+
+    public void setEmojiCount(int emojiCount) {
+        this.emojiCount = emojiCount;
+    }
+
+    public double getNormEmojis() {
+        return normEmojis;
+    }
+
+    public void setNormEmojis(double normEmojis) {
+        this.normEmojis = normEmojis;
+    }
+
+    public int getQueryLength(){
+        return query.length()-1;
+    }
+
     @Override
     public String toString(){
         return "Movie hashtag is " + query + "\nwith " + numTweets + " tweets.\n"
@@ -261,6 +285,7 @@ public class MovieInfo {
                 + normPunctuation + " normalized punctuation characters.\n"
                 + normPositiveNoRts + " normalized positive in not retweets.\n"
                 + normNegativeNoRts + " normalized negative in not retweets.\n"
+                + normEmojis + " normalized emojis.\n"
                 + "Is 'movie' in hashtag? " + hasMovieInQuery + "\n"
                 + "Favorited: " + favoriteCount + "\n"
                 + "Days in theater: " + days + "\n";

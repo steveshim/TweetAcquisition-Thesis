@@ -117,6 +117,9 @@ public class Extractor {
      */
 
     public void countWordTotal(String text, MovieInfo movie){
+        if (text.startsWith("\uD83D")){
+            movie.increaseEmoji();
+        }
         if (positiveWords.contains(text.toLowerCase()) &&
                 !movie.getQuery().toLowerCase().contains(text.toLowerCase())){
             if(!negate)

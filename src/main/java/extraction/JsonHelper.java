@@ -6,6 +6,7 @@ public class JsonHelper {
 
     public static String makeJson(MovieInfo movie){
         String jsonString = "{'query':'" + movie.getQuery() + "', " +
+                "'query_length':" + movie.getQueryLength() + ", " +
                 "'gross':" + movie.getGross() + ", " +
                 "'retweets':" + movie.getNumRts() + ", " +
                 "'tweets':" + movie.getNumTweets() + ", " +
@@ -16,6 +17,7 @@ public class JsonHelper {
                 "'movie_in_query':" + movie.getHasMovieInQuery() + ", " +
                 "'positive_no_retweets':" + movie.getNormPositiveNoRts() + ", " +
                 "'negative_no_retweets':" + movie.getNormNegativeNoRts() + ", " +
+                "'emoji_count':" + movie.getNormEmojis() + ", " +
                 "'favorites_per_tweet':" + ((double)movie.getFavoriteCount()/(double)movie.getNumTweets()) + ", " +
                 "'daysInTheater':" + movie.getDays() + "}";
         return jsonString;

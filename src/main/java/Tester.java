@@ -1,31 +1,23 @@
+import com.mongodb.client.MongoCursor;
+import extraction.MongoHelper;
+import org.bson.Document;
 
 public class Tester {
     public static void main(String[] args){
-        String test = "This is not a bad movie fdasf";
-        boolean negate = false;
-        int negateCounter = 0;
-        int cCount = 0;
-        String[] testa = test.split("\\s");
-        for (int i=0; i<testa.length; i++){
-            if (negateCounter>=2){
-                negate = false;
-            }
-            if (testa[i].toLowerCase().equals("no") || testa[i].toLowerCase().equals("not")){
-                negate = true;
-                continue;
-            }
-            if (negate){
-                negateCounter++;
-                System.out.println(testa[i]);
-                if (testa[i].toLowerCase().equals("good")) {
-                    negate=false;
-                    cCount--;
+        MongoHelper mongo = new MongoHelper("movies", "tweets");
+        MongoCursor<Document> cursor = mongo.getCollection().find().iterator();
+        while(cursor.hasNext()){
+            Document document = cursor.next();
+            String text = document.getString("text");
+            String[] tweetArray = text.split("\\s");
+            for (int i = 0; i < tweetArray.length; i++) {
+                String emoji = "x1f602";
+                if(tweetArray[i].toLowerCase().startsWith("\uD83D")){
+                    System.out.println(text);
+                    break;
                 }
-            } else{
-                if (testa[i].toLowerCase().equals("good"))
-                    cCount++;
             }
+
         }
-        System.out.println(cCount);
     }
 }
