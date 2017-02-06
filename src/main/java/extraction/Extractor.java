@@ -45,13 +45,14 @@ public class Extractor {
             Double gross = document.getDouble("gross");
             String query = document.getString("query");
             String user = document.getString("userName");
+            Double theaterCount = document.getDouble("theater_count");
             Integer favorites = document.getInteger("favoriteCount");
             //account for thanksgiving
             int daysOpened = 3;
             if(document.getInteger("days")!=null && document.getInteger("days") != 3){
                 daysOpened = 5;
             }
-            MovieInfo temp = new MovieInfo(query, gross, daysOpened);
+            MovieInfo temp = new MovieInfo(query, gross, daysOpened, theaterCount);
             if (!movies.contains(temp)){
                 System.out.println(query);
                 movies.add(temp);
@@ -104,12 +105,16 @@ public class Extractor {
 
         MongoHelper mongoMovies = new MongoHelper("movies", "movies");
 
+        int countMovies = 0;
         for(MovieInfo movie: movies){
             movie.normalizeValues();
             System.out.println(movie.toString());
             String jsonString = JsonHelper.makeJson(movie);
             mongoMovies.getCollection().insertOne(Document.parse(jsonString));
+            countMovies++;
         }
+        System.out.println();
+        System.out.println("Number of movies = " + countMovies);
     }
 
     /*

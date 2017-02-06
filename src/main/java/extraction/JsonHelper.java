@@ -8,6 +8,7 @@ public class JsonHelper {
         String jsonString = "{'query':'" + movie.getQuery() + "', " +
                 "'query_length':" + movie.getQueryLength() + ", " +
                 "'gross':" + movie.getGross() + ", " +
+                "'theater_count':" + movie.getTheaterCount() + ", " +
                 "'retweets':" + movie.getNumRts() + ", " +
                 "'tweets':" + movie.getNumTweets() + ", " +
                 "'positive':" + movie.getNormPositive() + ", " +

@@ -15,11 +15,13 @@ public class MovieInfo {
     private double gross;
     private NumberFormat formatter = NumberFormat.getCurrencyInstance();
     private int hasMovieInQuery;
+    private double theaterCount;
 
-    public MovieInfo(String query, double gross, int days){
+    public MovieInfo(String query, double gross, int days, double theaterCount){
         this.query = query;
         this.gross = gross;
         this.days = days;
+        this.theaterCount = theaterCount;
         if (query.toLowerCase().contains("movie")){
             hasMovieInQuery = 1;
         } else{
@@ -270,6 +272,14 @@ public class MovieInfo {
         this.normEmojis = normEmojis;
     }
 
+    public double getTheaterCount() {
+        return theaterCount;
+    }
+
+    public void setTheaterCount(double theaterCount) {
+        this.theaterCount = theaterCount;
+    }
+
     public int getQueryLength(){
         return query.length()-1;
     }
@@ -279,6 +289,7 @@ public class MovieInfo {
         return "Movie hashtag is " + query + "\nwith " + numTweets + " tweets.\n"
                 + "Number of retweets: " + numRts + "\n"
                 + "Grossed " + formatter.format(gross) + " on opening weekend.\n"
+                + "Number of theaters " + theaterCount + ".\n"
                 + normPositive + " normalized positive words.\n"
                 + normNegative + " normalized negative words.\n"
                 + normCapital + " normalized capital letters.\n"

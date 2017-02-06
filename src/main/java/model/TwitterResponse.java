@@ -5,11 +5,12 @@ public class TwitterResponse {
     private int favoriteCount;
     private int retweetCount;
     private int days;
+    private double theater_count;
     private double gross;
     private String userName, text, date, source, twitterQuery;
 
     public TwitterResponse(long id, int favoriteCount, int retweetCount, String userName,
-                           String text, String date, String source, String twitterQuery, double gross, int days){
+                           String text, String date, String source, String twitterQuery, double gross, int days, double theater_count){
         super();
         this.id = id;
         this.favoriteCount = favoriteCount;
@@ -21,6 +22,7 @@ public class TwitterResponse {
         this.twitterQuery = twitterQuery;
         this.gross = gross;
         this.days = days;
+        this.theater_count = theater_count;
     }
 
     public int getFavoriteCount() {
@@ -101,6 +103,14 @@ public class TwitterResponse {
 
     public void setDays(int days) {
         this.days = days;
+    }
+
+    public double getTheater_count() {
+        return theater_count;
+    }
+
+    public void setTheater_count(double theater_count) {
+        this.theater_count = theater_count;
     }
 
     @Override

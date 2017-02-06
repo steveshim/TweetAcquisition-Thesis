@@ -23,24 +23,27 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
     private final int MINUTE = 60000;
     private final double GROSS;
     private int days;
+    private final double THEATER_COUNT;
 
 
-    public Source(long minId, String searchQuery, String date, double gross){
+    public Source(long minId, String searchQuery, String date, double gross, double theaterCount){
         System.out.println("Searching for: " + searchQuery);
         this.minId = minId;
         this.TWITTER_QUERY = searchQuery;
         this.MOVIE_DATE = date;
         this.GROSS = gross;
         this.days = 3;
+        this.THEATER_COUNT = theaterCount;
     }
 
-    public Source(long minId, String searchQuery, String date, double gross, int days){
+    public Source(long minId, String searchQuery, String date, double gross, int days, double theaterCount){
         System.out.println("Searching for: " + searchQuery);
         this.minId = minId;
         this.TWITTER_QUERY = searchQuery;
         this.MOVIE_DATE = date;
         this.GROSS = gross;
         this.days = days;
+        this.THEATER_COUNT = theaterCount;
     }
 
     public Collection<TwitterResponse> next(){
@@ -85,7 +88,7 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
                     System.out.println("Tweeted on: " + status.getCreatedAt().toString());
                     minId = Math.min(minId, status.getId());
                     list.add(new TwitterResponse(status.getId(), status.getFavoriteCount(), status.getRetweetCount(),
-                            status.getUser().getName(), status.getText(), status.getCreatedAt().toString(), status.getSource(), TWITTER_QUERY, GROSS, days));
+                            status.getUser().getName(), status.getText(), status.getCreatedAt().toString(), status.getSource(), TWITTER_QUERY, GROSS, days, THEATER_COUNT));
                 }
             } while ((query = result.nextQuery()) != null);
         }catch (TwitterException e){
