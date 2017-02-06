@@ -8,11 +8,11 @@ public class CollectorApp {
 
     public static void main(String[] args){
 
-        double gross = 3471316;
-        String mondayDate = "2017-01-30";
-        String hashtag = "#GoldMovie";
+        double gross = 3775596;
+        String mondayDate = "2017-02-06";
+        String hashtag = "#TheSpaceBetweenUs";
         int days = 3;
-        double theaterCount = 2000;
+        double theaterCount = 2812;
 
         Collector collector = new Collector();
         //Source source = new Source(Long.MAX_VALUE, hashtag, mondayDate, gross);
