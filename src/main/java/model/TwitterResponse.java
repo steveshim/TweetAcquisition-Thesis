@@ -6,11 +6,14 @@ public class TwitterResponse {
     private int retweetCount;
     private int days;
     private double theater_count;
+    private double averageTemp, averageRain, averageSnow;
     private double gross;
     private String userName, text, date, source, twitterQuery;
 
     public TwitterResponse(long id, int favoriteCount, int retweetCount, String userName,
-                           String text, String date, String source, String twitterQuery, double gross, int days, double theater_count){
+                           String text, String date, String source, String twitterQuery,
+                           double gross, int days, double theater_count,
+                           double averageTemp, double averageRain, double averageSnow){
         super();
         this.id = id;
         this.favoriteCount = favoriteCount;
@@ -23,6 +26,9 @@ public class TwitterResponse {
         this.gross = gross;
         this.days = days;
         this.theater_count = theater_count;
+        this.averageRain = averageRain;
+        this.averageTemp = averageTemp;
+        this.averageSnow = averageSnow;
     }
 
     public int getFavoriteCount() {
@@ -111,6 +117,30 @@ public class TwitterResponse {
 
     public void setTheater_count(double theater_count) {
         this.theater_count = theater_count;
+    }
+
+    public double getAverageTemp() {
+        return averageTemp;
+    }
+
+    public void setAverageTemp(double averageTemp) {
+        this.averageTemp = averageTemp;
+    }
+
+    public double getAverageRain() {
+        return averageRain;
+    }
+
+    public void setAverageRain(double averageRain) {
+        this.averageRain = averageRain;
+    }
+
+    public double getAverageSnow() {
+        return averageSnow;
+    }
+
+    public void setAverageSnow(double averageSnow) {
+        this.averageSnow = averageSnow;
     }
 
     @Override

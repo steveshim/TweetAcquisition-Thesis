@@ -15,13 +15,17 @@ public class MovieInfo {
     private double gross;
     private NumberFormat formatter = NumberFormat.getCurrencyInstance();
     private int hasMovieInQuery;
-    private double theaterCount;
+    private double theaterCount, averageTemp, averageRain, averageSnow;
 
-    public MovieInfo(String query, double gross, int days, double theaterCount){
+    public MovieInfo(String query, double gross, int days, double theaterCount, double averageTemp,
+                     double averageRain, double averageSnow){
         this.query = query;
         this.gross = gross;
         this.days = days;
         this.theaterCount = theaterCount;
+        this.averageTemp = averageTemp;
+        this.averageRain = averageRain;
+        this.averageSnow = averageSnow;
         if (query.toLowerCase().contains("movie")){
             hasMovieInQuery = 1;
         } else{
@@ -282,6 +286,30 @@ public class MovieInfo {
 
     public int getQueryLength(){
         return query.length()-1;
+    }
+
+    public double getAverageTemp() {
+        return averageTemp;
+    }
+
+    public void setAverageTemp(double averageTemp) {
+        this.averageTemp = averageTemp;
+    }
+
+    public double getAverageRain() {
+        return averageRain;
+    }
+
+    public void setAverageRain(double averageRain) {
+        this.averageRain = averageRain;
+    }
+
+    public double getAverageSnow() {
+        return averageSnow;
+    }
+
+    public void setAverageSnow(double averageSnow) {
+        this.averageSnow = averageSnow;
     }
 
     @Override

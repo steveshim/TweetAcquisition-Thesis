@@ -24,9 +24,13 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
     private final double GROSS;
     private int days;
     private final double THEATER_COUNT;
+    private final double AVERAGE_TEMP;
+    private final double AVERAGE_RAIN;
+    private final double AVERAGE_SNOW;
 
 
-    public Source(long minId, String searchQuery, String date, double gross, double theaterCount){
+    public Source(long minId, String searchQuery, String date, double gross,
+                  double theaterCount, double averageTemp, double averageRain, double averageSnow){
         System.out.println("Searching for: " + searchQuery);
         this.minId = minId;
         this.TWITTER_QUERY = searchQuery;
@@ -34,9 +38,13 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
         this.GROSS = gross;
         this.days = 3;
         this.THEATER_COUNT = theaterCount;
+        this.AVERAGE_TEMP = averageTemp;
+        this.AVERAGE_RAIN = averageRain;
+        this.AVERAGE_SNOW = averageSnow;
     }
 
-    public Source(long minId, String searchQuery, String date, double gross, int days, double theaterCount){
+    public Source(long minId, String searchQuery, String date, double gross, int days, double theaterCount,
+                  double averageTemp, double averageRain, double averageSnow){
         System.out.println("Searching for: " + searchQuery);
         this.minId = minId;
         this.TWITTER_QUERY = searchQuery;
@@ -44,6 +52,9 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
         this.GROSS = gross;
         this.days = days;
         this.THEATER_COUNT = theaterCount;
+        this.AVERAGE_TEMP = averageTemp;
+        this.AVERAGE_RAIN = averageRain;
+        this.AVERAGE_SNOW = averageSnow;
     }
 
     public Collection<TwitterResponse> next(){
@@ -88,7 +99,8 @@ public class Source implements Iterator<Collection<TwitterResponse>> {
                     System.out.println("Tweeted on: " + status.getCreatedAt().toString());
                     minId = Math.min(minId, status.getId());
                     list.add(new TwitterResponse(status.getId(), status.getFavoriteCount(), status.getRetweetCount(),
-                            status.getUser().getName(), status.getText(), status.getCreatedAt().toString(), status.getSource(), TWITTER_QUERY, GROSS, days, THEATER_COUNT));
+                            status.getUser().getName(), status.getText(), status.getCreatedAt().toString(), status.getSource(),
+                            TWITTER_QUERY, GROSS, days, THEATER_COUNT, AVERAGE_TEMP, AVERAGE_RAIN, AVERAGE_SNOW));
                 }
             } while ((query = result.nextQuery()) != null);
         }catch (TwitterException e){

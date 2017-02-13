@@ -20,6 +20,9 @@ public class JsonHelper {
                 "'negative_no_retweets':" + movie.getNormNegativeNoRts() + ", " +
                 "'emoji_count':" + movie.getNormEmojis() + ", " +
                 "'favorites_per_tweet':" + ((double)movie.getFavoriteCount()/(double)movie.getNumTweets()) + ", " +
+                "'averageTemp':" + movie.getAverageTemp() + ", " +
+                "'averageRain':" + movie.getAverageRain() + ", " +
+                "'averageSnow':" + movie.getAverageSnow() + ", " +
                 "'daysInTheater':" + movie.getDays() + "}";
         return jsonString;
     }
