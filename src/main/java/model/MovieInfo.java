@@ -327,7 +327,10 @@ public class MovieInfo {
                 + normEmojis + " normalized emojis.\n"
                 + "Is 'movie' in hashtag? " + hasMovieInQuery + "\n"
                 + "Favorited: " + favoriteCount + "\n"
-                + "Days in theater: " + days + "\n";
+                + "Days in theater: " + days + "\n"
+                + "Average temperature: " + averageTemp + "\n"
+                + "Average rain: " + averageRain + "\n"
+                + "Average snow: " + averageSnow + "\n";
     }
 
     @Override

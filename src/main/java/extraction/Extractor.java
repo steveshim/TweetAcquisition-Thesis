@@ -48,14 +48,18 @@ public class Extractor {
             Double theaterCount = document.getDouble("theater_count");
             Double averageTemp = document.getDouble("averageTemp");
             Double averageRain = document.getDouble("averageRain");
-            Double averageSnow = document.getDouble("averageSnow");
             Integer favorites = document.getInteger("favoriteCount");
             //account for thanksgiving
             int daysOpened = 3;
             if(document.getInteger("days")!=null && document.getInteger("days") != 3){
                 daysOpened = 5;
             }
-            
+
+            Double averageSnow = 0.0;
+            if(document.getDouble("averageSnow") != null){
+                averageSnow = document.getDouble("averageSnow");
+            }
+
             MovieInfo temp = new MovieInfo(query, gross, daysOpened, theaterCount,
                     averageTemp, averageRain, averageSnow);
 
