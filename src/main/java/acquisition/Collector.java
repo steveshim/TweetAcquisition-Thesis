@@ -34,7 +34,9 @@ public class Collector {
                 append("tweetId", item.getId()).append("favoriteCount", item.getFavoriteCount()).
                 append("retweetCount", item.getRetweetCount()).append("userName", item.getUserName()).
                 append("text", item.getText()).append("date", item.getDate()).append("source", item.getSource()).
-                append("query", item.getTwitterQuery()).append("gross", item.getGross()).append("days", item.getDays()))
+                append("query", item.getTwitterQuery()).append("gross", item.getGross()).append("days", item.getDays()).
+                append("theater_count", item.getTheater_count()).append("averageTemp", item.getAverageTemp()).
+                append("averageRain", item.getAverageRain()).append("averageSnow", item.getAverageSnow()))
                 .collect(Collectors.toList());
 
         collection.insertMany(documents);
