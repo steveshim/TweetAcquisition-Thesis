@@ -8,14 +8,14 @@ public class CollectorApp {
 
     public static void main(String[] args){
 
-        double gross = 53003468;
-        double budget = 0;
-        String mondayDate = "2017-02-13";
-        String hashtag = "#LEGOBatmanMovie";
+        double gross = 4350000;
+        double budget = 40;
+        String mondayDate = "2017-02-20";
+        String hashtag = "#CureForWellness";
         int days = 3;
-        double theaterCount = 4088;
-        double averageTemp = 41.5;
-        double averageRain = 0.06;
+        double theaterCount = 333;
+        double averageTemp = 47;
+        double averageRain = 0.40375;
         double averageSnow = 0;
 
         Collector collector = new Collector();
