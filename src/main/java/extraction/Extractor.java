@@ -43,6 +43,7 @@ public class Extractor {
             Document document = cursor.next();
             String text = document.getString("text");
             Double gross = document.getDouble("gross");
+            Double budget = document.getDouble("budget");
             String query = document.getString("query");
             String user = document.getString("userName");
             Double theaterCount = document.getDouble("theater_count");
@@ -61,7 +62,7 @@ public class Extractor {
             }
 
             MovieInfo temp = new MovieInfo(query, gross, daysOpened, theaterCount,
-                    averageTemp, averageRain, averageSnow);
+                    averageTemp, averageRain, averageSnow, budget);
 
             if (!movies.contains(temp)){
                 System.out.println(query);

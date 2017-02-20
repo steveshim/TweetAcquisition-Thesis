@@ -9,6 +9,7 @@ public class CollectorApp {
     public static void main(String[] args){
 
         double gross = 53003468;
+        double budget = 0;
         String mondayDate = "2017-02-13";
         String hashtag = "#LEGOBatmanMovie";
         int days = 3;
@@ -19,7 +20,8 @@ public class CollectorApp {
 
         Collector collector = new Collector();
         //Source source = new Source(Long.MAX_VALUE, hashtag, mondayDate, gross);
-        Source source = new Source(Long.MAX_VALUE, hashtag, mondayDate, gross, days, theaterCount, averageTemp, averageRain, averageSnow);
+        Source source = new Source(Long.MAX_VALUE, hashtag, mondayDate, gross, days,
+                theaterCount, averageTemp, averageRain, averageSnow, budget);
 
         while (source.hasNext()){
             Collection<TwitterResponse> tweets = source.next();

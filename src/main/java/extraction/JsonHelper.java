@@ -23,6 +23,7 @@ public class JsonHelper {
                 "'averageTemp':" + movie.getAverageTemp() + ", " +
                 "'averageRain':" + movie.getAverageRain() + ", " +
                 "'averageSnow':" + movie.getAverageSnow() + ", " +
+                "'budget':" + movie.getBudget() + ", " +
                 "'daysInTheater':" + movie.getDays() + "}";
         return jsonString;
     }
